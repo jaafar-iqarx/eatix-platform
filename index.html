@@ -519,12 +519,12 @@ function renderSolutions() {
 
     const accentColor = gc.num.split(' ')[1];
     const sectionsHtml = s.sections.map(sec => `
-      <div class="bg-brand-50 rounded-xl border border-brand-200/60 p-4">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-1.5 h-5 ${gc.dot} rounded-full"></div>
-          <h4 class="text-xs font-bold tracking-wide uppercase ${accentColor}">${sec.title}</h4>
+      <div class="bg-white rounded-2xl border border-brand-200 p-5">
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="w-7 h-7 ${gc.num} rounded-lg flex items-center justify-center"><i data-lucide="layers" class="w-3.5 h-3.5"></i></div>
+          <h4 class="text-sm font-bold text-brand-700">${sec.title}</h4>
         </div>
-        <div class="flex flex-wrap gap-2">${sec.items.map(item => `<span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-lg border border-brand-200/80 text-xs text-brand-700 font-medium">${item}</span>`).join('')}</div>
+        <div class="flex flex-wrap gap-2">${sec.items.map(item => `<span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface rounded-lg border border-brand-200 text-xs text-brand-600 font-medium cursor-pointer hover:border-brand-300 transition-colors duration-150">${item}</span>`).join('')}</div>
       </div>
     `).join('');
 
@@ -539,7 +539,7 @@ function renderSolutions() {
         <i data-lucide="chevron-down" class="w-4 h-4 text-brand-600/30 transition-transform duration-200 sol-chev"></i>
       </div>
       <div class="sol-body border-t border-brand-200" style="display:none">
-        <div class="p-5 grid sm:grid-cols-2 gap-3">${sectionsHtml}</div>
+        <div class="p-5 bg-brand-50/80 grid sm:grid-cols-2 gap-3">${sectionsHtml}</div>
       </div>
     </div>`;
   });
