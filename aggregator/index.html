@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2B Aggregator — From Field to Fork, Digitally</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#F0FDF4', 100:'#DCFCE7', 200:'#BBF7D0', 300:'#86EFAC', 400:'#22C55E', 500:'#15803D', 600:'#14532D', 700:'#052E16' },
+        navy: { 50:'#F8FAFC', 100:'#F1F5F9', 200:'#E2E8F0', 300:'#CBD5E1', 400:'#94A3B8', 500:'#0F172A', 600:'#020617' },
+        gold: '#CA8A04',
+        cta: '#0369A1',
+      },
+      fontFamily: { body: ['"Plus Jakarta Sans"', 'sans-serif'] }
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .fade-up { opacity:0; transform:translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+  @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { transition:none; opacity:1; transform:none; }
+    @keyframes slideUp { from,to { opacity:1; transform:none; } }
+  }
+  .sol-body { transition: max-height 0.3s ease; }
+</style>
+</head>
+<body class="bg-navy-50 text-navy-500">
+
+<!-- NAV -->
+<nav class="fixed top-4 left-4 right-4 z-50 bg-white/90 backdrop-blur-md rounded-2xl border border-navy-200 px-4 sm:px-6 lg:px-8 transition-all duration-200">
+  <div class="max-w-7xl mx-auto flex items-center justify-between h-14">
+    <a href="#hero" class="text-xl font-extrabold text-brand-500 tracking-tight cursor-pointer">B2B Aggregator</a>
+    <div class="hidden md:flex items-center gap-1">
+      <a href="#summary" class="px-3 py-1.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer">Vision</a>
+      <a href="#psychology" class="px-3 py-1.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer">Psychology</a>
+      <a href="#roles" class="px-3 py-1.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer">Roles</a>
+      <a href="#solutions" class="px-3 py-1.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer">Solutions</a>
+      <a href="#operations" class="px-3 py-1.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer">Operations</a>
+      <a href="#ai" class="px-3 py-1.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer">AI</a>
+    </div>
+    <button onclick="toggleMobileNav()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-brand-50 transition-colors duration-200 cursor-pointer" aria-label="Toggle menu">
+      <i data-lucide="menu" class="w-5 h-5 text-navy-500 burger-icon"></i>
+      <i data-lucide="x" class="w-5 h-5 text-navy-500 burger-close hidden"></i>
+    </button>
+  </div>
+  <div id="mobileMenu" class="md:hidden overflow-hidden transition-all duration-300" style="max-height:0">
+    <div class="flex flex-col gap-1 pb-4 pt-2 border-t border-navy-200 mt-2">
+      <a href="#summary" onclick="closeMobileNav()" class="px-4 py-2.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 cursor-pointer">Vision</a>
+      <a href="#psychology" onclick="closeMobileNav()" class="px-4 py-2.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 cursor-pointer">Psychology</a>
+      <a href="#roles" onclick="closeMobileNav()" class="px-4 py-2.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 cursor-pointer">Roles</a>
+      <a href="#solutions" onclick="closeMobileNav()" class="px-4 py-2.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 cursor-pointer">Solutions</a>
+      <a href="#operations" onclick="closeMobileNav()" class="px-4 py-2.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 cursor-pointer">Operations</a>
+      <a href="#ai" onclick="closeMobileNav()" class="px-4 py-2.5 text-sm font-medium text-navy-500 rounded-lg hover:bg-brand-50 cursor-pointer">AI</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="inline-block px-4 py-1.5 bg-brand-100 text-brand-500 text-xs font-bold tracking-widest uppercase rounded-full mb-6 fade-up">Iraq's First Full-Chain Agricultural B2B Marketplace</div>
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-700 leading-tight mb-6 fade-up">From Every Farm<br>to Every Table</h1>
+    <p class="text-sm font-semibold text-brand-500 uppercase tracking-wider mb-8 fade-up">Fair Prices. Trusted Quality. Always.</p>
+    <p class="text-lg text-navy-400 max-w-2xl mx-auto mb-10 leading-relaxed fade-up">A complete agricultural marketplace — from the farm gate to every buyer's door. We secure every farmer's sales and guarantee their payments. We serve every buyer with the right product, graded, processed, and delivered on time. No middlemen. No price games. No waste.</p>
+    <div class="flex flex-wrap justify-center gap-8 sm:gap-12 fade-up">
+      <div class="text-center"><div class="text-3xl font-extrabold text-brand-500">12</div><div class="text-xs text-navy-400 uppercase tracking-wider mt-1">Solutions</div></div>
+      <div class="text-center"><div class="text-3xl font-extrabold text-brand-500">$400M+</div><div class="text-xs text-navy-400 uppercase tracking-wider mt-1">Addressable Market</div></div>
+      <div class="text-center"><div class="text-3xl font-extrabold text-brand-500">28K+</div><div class="text-xs text-navy-400 uppercase tracking-wider mt-1">Food Businesses</div></div>
+      <div class="text-center"><div class="text-3xl font-extrabold text-brand-500">24/7</div><div class="text-xs text-navy-400 uppercase tracking-wider mt-1">Operations</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTIVE SUMMARY -->
+<section id="summary" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="inline-block px-3 py-1 bg-brand-100 text-brand-500 text-xs font-bold tracking-widest uppercase rounded mb-4 fade-up">Executive Summary</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-700 mb-4 fade-up">The Vision</h2>
+      <p class="text-navy-400 max-w-2xl mx-auto fade-up leading-relaxed">Not a marketplace. Not a middleman. The operational backbone of Iraq's food supply chain — connecting every farmer, every restaurant, every city through one trusted, intelligent platform that ensures nothing goes to waste and everyone gets a fair deal.</p>
+    </div>
+
+    <!-- Problem -->
+    <div class="bg-navy-50 rounded-2xl border border-navy-200 p-8 sm:p-10 mb-8 fade-up">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0"><i data-lucide="alert-triangle" class="w-5 h-5 text-red-500"></i></div>
+        <div><h3 class="text-lg font-bold text-navy-500">The Problem</h3><p class="text-sm text-navy-400 mt-1">$400M+ lost annually in Baghdad alone from spoilage, price manipulation, and supply chain waste.</p></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl p-4 border border-navy-200"><div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center mb-3"><i data-lucide="eye-off" class="w-4 h-4 text-red-400"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Price Opacity</h4><p class="text-xs text-navy-400">No way to compare or verify market prices. Middlemen control everything.</p></div>
+        <div class="bg-white rounded-xl p-4 border border-navy-200"><div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center mb-3"><i data-lucide="package-x" class="w-4 h-4 text-red-400"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Supply Chaos</h4><p class="text-xs text-navy-400">No advance ordering. Frequent shortages or surplus waste. 20-30% value lost.</p></div>
+        <div class="bg-white rounded-xl p-4 border border-navy-200"><div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center mb-3"><i data-lucide="banknote" class="w-4 h-4 text-red-400"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Cash Only</h4><p class="text-xs text-navy-400">All transactions cash-based at 2 AM markets. Security risks, no traceability.</p></div>
+        <div class="bg-white rounded-xl p-4 border border-navy-200"><div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center mb-3"><i data-lucide="scale" class="w-4 h-4 text-red-400"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">No Quality Control</h4><p class="text-xs text-navy-400">Variable quality, no standardized grading, no recourse for buyers.</p></div>
+        <div class="bg-white rounded-xl p-4 border border-navy-200"><div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center mb-3"><i data-lucide="users-round" class="w-4 h-4 text-red-400"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Sellers Exploited</h4><p class="text-xs text-navy-400">Small farmers have no leverage. Big sellers monopolize pricing.</p></div>
+        <div class="bg-white rounded-xl p-4 border border-navy-200"><div class="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center mb-3"><i data-lucide="truck" class="w-4 h-4 text-red-400"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">No Logistics</h4><p class="text-xs text-navy-400">No tracking, no coordination, delivery delays, post-harvest losses.</p></div>
+      </div>
+    </div>
+
+    <!-- Solution -->
+    <div class="bg-navy-50 rounded-2xl border border-navy-200 p-8 sm:p-10 mb-8 fade-up">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center flex-shrink-0"><i data-lucide="rocket" class="w-5 h-5 text-brand-500"></i></div>
+        <div><h3 class="text-lg font-bold text-navy-500">The Solution</h3><p class="text-sm text-navy-400 mt-1">One platform that accepts, grades, processes, stores, and distributes — end to end.</p></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl p-5 border border-navy-200 text-center"><div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="scan-line" class="w-5 h-5 text-brand-500"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Accept & Grade</h4><p class="text-xs text-navy-400">Quality check every product. Grade A, B, C. Route by grade.</p></div>
+        <div class="bg-white rounded-xl p-5 border border-navy-200 text-center"><div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="scissors" class="w-5 h-5 text-brand-500"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Process & Package</h4><p class="text-xs text-navy-400">Clean, cut, can, freeze, package. Ready-to-use or export-ready.</p></div>
+        <div class="bg-white rounded-xl p-5 border border-navy-200 text-center"><div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="git-branch" class="w-5 h-5 text-brand-500"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Funnel & Distribute</h4><p class="text-xs text-navy-400">Surplus in one city fills shortage in another. AI-driven logistics.</p></div>
+        <div class="bg-white rounded-xl p-5 border border-navy-200 text-center"><div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="globe" class="w-5 h-5 text-brand-500"></i></div><h4 class="text-sm font-bold text-navy-500 mb-1">Export</h4><p class="text-xs text-navy-400">Cut, freeze, package for international markets. Iraq becomes an exporter.</p></div>
+      </div>
+    </div>
+
+    <!-- Differentiators -->
+    <div class="bg-navy-50 rounded-2xl border border-navy-200 p-8 sm:p-10 fade-up">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-11 h-11 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0"><i data-lucide="star" class="w-5 h-5 text-gold"></i></div>
+        <div><h3 class="text-lg font-bold text-navy-500">What Makes B2B Aggregator Different</h3></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="diffGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PSYCHOLOGY -->
+<section id="psychology" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="inline-block px-3 py-1 bg-brand-100 text-brand-500 text-xs font-bold tracking-widest uppercase rounded mb-4 fade-up">Behavioral Foundation</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-700 mb-4 fade-up">Changing Behaviour, Not Just Building Software</h2>
+      <p class="text-navy-400 max-w-xl mx-auto fade-up">To replace decades of phone calls, cash handoffs, and 2 AM market runs, the digital route must feel better — not just more efficient.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-8 border-t-4 border-brand-400 fade-up cursor-pointer hover:bg-brand-50 transition-colors duration-200">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-5"><i data-lucide="zap" class="w-6 h-6 text-brand-500"></i></div>
+        <h3 class="text-lg font-bold text-navy-500 mb-3">Immediate Reward</h3>
+        <p class="text-sm text-navy-400 leading-relaxed">Seller lists a product — instantly live with fair price. Buyer places order — immediate ETA. Driver delivers — earnings counter ticks up. Every action gets visible feedback.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-8 border-t-4 border-gold fade-up cursor-pointer hover:bg-brand-50 transition-colors duration-200">
+        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-5"><i data-lucide="trophy" class="w-6 h-6 text-gold"></i></div>
+        <h3 class="text-lg font-bold text-navy-500 mb-3">Social Incentives</h3>
+        <p class="text-sm text-navy-400 leading-relaxed">Sellers see quality scores vs others. Buyers see popular products. Drivers see on-time rates vs fleet. Cities see fulfillment rates compared. Competition drives excellence.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-8 border-t-4 border-cta fade-up cursor-pointer hover:bg-brand-50 transition-colors duration-200">
+        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5"><i data-lucide="trending-up" class="w-6 h-6 text-cta"></i></div>
+        <h3 class="text-lg font-bold text-navy-500 mb-3">Progress Monitoring</h3>
+        <p class="text-sm text-navy-400 leading-relaxed">Revenue trends for sellers. Spending patterns for buyers. Processing throughput for warehouse. City performance for managers. Never leave anyone guessing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMOTIONAL ROLES -->
+<section id="roles" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="inline-block px-3 py-1 bg-amber-50 text-gold text-xs font-bold tracking-widest uppercase rounded mb-4 fade-up">Emotional Architecture</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-700 mb-4 fade-up">Designing for Feeling</h2>
+      <p class="text-navy-400 max-w-xl mx-auto fade-up">Every role has a unique emotional need. Select a role to explore.</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3 mb-10 fade-up" id="roleSelector"></div>
+    <div id="roleDetail" class="fade-up"></div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section id="solutions" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-10">
+      <div class="inline-block px-3 py-1 bg-brand-100 text-brand-500 text-xs font-bold tracking-widest uppercase rounded mb-4 fade-up">Platform Solutions</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-700 mb-4 fade-up">12 Solutions, One Platform</h2>
+      <p class="text-navy-400 max-w-xl mx-auto fade-up">From field to fork — every step is a dedicated interface, all connected through a unified core.</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-2 mb-8 fade-up" id="solutionTabs"></div>
+    <div id="solutionCards"></div>
+  </div>
+</section>
+
+<!-- OPERATIONS -->
+<section id="operations" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="inline-block px-3 py-1 bg-brand-100 text-brand-500 text-xs font-bold tracking-widest uppercase rounded mb-4 fade-up">How It Works</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-700 mb-4 fade-up">24/7 Operations Cycle</h2>
+      <p class="text-navy-400 max-w-xl mx-auto fade-up">Not limited to nightly markets. Continuous operations across procurement, processing, and delivery.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-navy-50 rounded-2xl p-6 border border-navy-200 fade-up">
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center"><i data-lucide="moon" class="w-5 h-5 text-indigo-600"></i></div><h3 class="font-bold text-navy-500">Nightly Procurement</h3></div>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3"><span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded flex-shrink-0">8PM</span><p class="text-sm text-navy-400">Buyer orders placed, market intel captured by field team</p></div>
+          <div class="flex items-start gap-3"><span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded flex-shrink-0">12AM</span><p class="text-sm text-navy-400">Procurement team confirms purchases at wholesale markets</p></div>
+          <div class="flex items-start gap-3"><span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded flex-shrink-0">3AM</span><p class="text-sm text-navy-400">Hub intake, QA inspection, grading (A/B/C)</p></div>
+          <div class="flex items-start gap-3"><span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded flex-shrink-0">5AM</span><p class="text-sm text-navy-400">Fulfillment, weight recording, pick and pack</p></div>
+          <div class="flex items-start gap-3"><span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-1 rounded flex-shrink-0">7AM</span><p class="text-sm text-navy-400">Delivery with ePOD, buyer acceptance within 2 hours</p></div>
+        </div>
+      </div>
+      <div class="bg-navy-50 rounded-2xl p-6 border border-navy-200 fade-up">
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center"><i data-lucide="sun" class="w-5 h-5 text-amber-600"></i></div><h3 class="font-bold text-navy-500">Continuous Daytime</h3></div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-brand-400 rounded-full"></div><p class="text-sm text-navy-400">Seller product intake throughout the day</p></div>
+          <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-brand-400 rounded-full"></div><p class="text-sm text-navy-400">Processing pipeline: clean, cut, can, freeze, package</p></div>
+          <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-brand-400 rounded-full"></div><p class="text-sm text-navy-400">Recurring & scheduled order fulfillment</p></div>
+          <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-brand-400 rounded-full"></div><p class="text-sm text-navy-400">Inter-city transfers based on real-time demand</p></div>
+          <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-brand-400 rounded-full"></div><p class="text-sm text-navy-400">Export preparation and dispatch</p></div>
+          <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-brand-400 rounded-full"></div><p class="text-sm text-navy-400">Customer support 24/7</p></div>
+        </div>
+      </div>
+    </div>
+    <!-- Processing + Grading -->
+    <div class="mt-8 grid md:grid-cols-2 gap-6">
+      <div class="bg-navy-50 rounded-2xl p-6 border border-navy-200 fade-up">
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center"><i data-lucide="check-circle" class="w-5 h-5 text-brand-500"></i></div><h3 class="font-bold text-navy-500">Quality Grading</h3></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-green-50 rounded-xl p-3 border border-green-200 text-center"><span class="text-lg font-bold text-green-700">A</span><p class="text-xs text-green-600 mt-1">Premium stores, restaurants, export</p></div>
+          <div class="bg-blue-50 rounded-xl p-3 border border-blue-200 text-center"><span class="text-lg font-bold text-blue-700">B</span><p class="text-xs text-blue-600 mt-1">Standard stores, restaurants</p></div>
+          <div class="bg-amber-50 rounded-xl p-3 border border-amber-200 text-center"><span class="text-lg font-bold text-amber-700">C</span><p class="text-xs text-amber-600 mt-1">Processing: can, freeze, cut</p></div>
+          <div class="bg-red-50 rounded-xl p-3 border border-red-200 text-center"><span class="text-lg font-bold text-red-700">Below</span><p class="text-xs text-red-600 mt-1">Waste management, composting</p></div>
+        </div>
+      </div>
+      <div class="bg-navy-50 rounded-2xl p-6 border border-navy-200 fade-up">
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center"><i data-lucide="workflow" class="w-5 h-5 text-brand-500"></i></div><h3 class="font-bold text-navy-500">Processing Pipeline</h3></div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-sm text-navy-400"><i data-lucide="arrow-right" class="w-3 h-3 text-brand-400"></i>Fresh (as-is) &rarr; package &rarr; distribute</div>
+          <div class="flex items-center gap-2 text-sm text-navy-400"><i data-lucide="arrow-right" class="w-3 h-3 text-brand-400"></i>Clean &rarr; package &rarr; distribute</div>
+          <div class="flex items-center gap-2 text-sm text-navy-400"><i data-lucide="arrow-right" class="w-3 h-3 text-brand-400"></i>Clean &rarr; cut to forms &rarr; package (ready-to-use)</div>
+          <div class="flex items-center gap-2 text-sm text-navy-400"><i data-lucide="arrow-right" class="w-3 h-3 text-brand-400"></i>Clean &rarr; process &rarr; can</div>
+          <div class="flex items-center gap-2 text-sm text-navy-400"><i data-lucide="arrow-right" class="w-3 h-3 text-brand-400"></i>Clean &rarr; process &rarr; freeze</div>
+          <div class="flex items-center gap-2 text-sm text-navy-400"><i data-lucide="arrow-right" class="w-3 h-3 text-brand-400"></i>Package for export</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai" class="py-20 px-4 sm:px-6 lg:px-8 bg-brand-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="inline-block px-3 py-1 bg-brand-200 text-brand-500 text-xs font-bold tracking-widest uppercase rounded mb-4 fade-up">Intelligence Layer</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-700 mb-4 fade-up">AI & Data Strategy</h2>
+      <p class="text-navy-400 max-w-xl mx-auto fade-up">Data is the real product. AI turns it into agricultural intelligence for Iraq.</p>
+    </div>
+    <div class="flex justify-center gap-2 mb-10 fade-up flex-wrap" id="aiNav"></div>
+    <div id="aiPanel" class="min-h-[320px]"></div>
+    <div class="flex justify-center gap-2 mt-8 fade-up" id="aiDots"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 px-4 text-center border-t border-navy-200">
+  <div class="text-lg font-extrabold text-brand-500 mb-2">B2B Aggregator</div>
+  <p class="text-sm text-navy-400">From Field to Fork, Digitally.</p>
+  <p class="text-xs text-navy-300 mt-1">Confidential &mdash; April 2026</p>
+</footer>
+
+<script>
+// === DIFFERENTIATORS ===
+const diffs = ['Committed pricing locked at checkout (WACP)','Centralized QA with grade-based routing','24/7 operations — not just nightly markets','Fair pricing: cut monopoly, empower small sellers','Multi-city funneling (surplus fills shortage)','Full processing: clean, cut, can, freeze, export','Qi Group payment infrastructure','AI demand prediction & price intelligence','Food rescue & waste management built in'];
+document.getElementById('diffGrid').innerHTML = diffs.map(d => `<div class="flex items-start gap-3 p-3 bg-white rounded-xl border border-navy-200"><div class="w-6 h-6 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-500"></i></div><span class="text-sm text-navy-500">${d}</span></div>`).join('');
+
+// === ROLES ===
+const roles = [
+  { name:'Seller', motto:'Security & Dignity', icon:'sprout', color:'green',
+    desc:'The platform must make farmers feel respected, secure, and in control — not exploited.',
+    items:['Always see a fair price — never feel cheated','Guaranteed payment via Qi — no broken promises','Quality feedback is constructive, not punitive','Revenue trends visible — see business growing','Products sold quickly — never left wondering','Simple interface any farmer can use'] },
+  { name:'Buyer (Restaurant)', motto:'Reliability & Speed', icon:'utensils', color:'blue',
+    desc:'A dependable partner that never lets them down — ingredients arrive, on time, at predictable prices.',
+    items:['Always find what they need, even in shortage','Recurring orders — it just arrives','Refill cart in 2 taps, not rebuild','Fair stable pricing — no daily haggling','Grade transparency — what they ordered is what they get','BNPL for cash flow breathing room'] },
+  { name:'Buyer (Shop)', motto:'Volume & Value', icon:'store', color:'cyan',
+    desc:'A wholesale partner that understands retail shelves — predictable supply at competitive prices.',
+    items:['Bulk ordering that is simple and fast','Grade selection: A for premium, B for value','Price transparency — see exactly what and why','Recurring orders for staples — never run empty','Seasonal planning tools','Clean automatic invoicing'] },
+  { name:'Runner', motto:'Efficiency & Recognition', icon:'map-pin', color:'orange',
+    desc:'Quick acceptance, clear routes, offline capability — the tool makes them look professional.',
+    items:['Clear daily route — no guessing','Quick flow: scan, weigh, photo, confirm','Seller info at fingertips','Works offline in areas with no signal','Performance badges and recognition','15 intel entries + 3 purchases in under 45 min'] },
+  { name:'Warehouse Staff', motto:'Clarity & Flow', icon:'warehouse', color:'amber',
+    desc:'Every product has clear instructions. Status tracking feels like progress.',
+    items:['Pre-populated checklists — fill, not build','3-button grading: Accept / Reject / Downgrade','Processing steps are guided','Throughput metrics feel motivating','Waste tracked but improvement celebrated','Inspect, grade, assign in under 5 min per lot'] },
+  { name:'Driver', motto:'Independence & Earnings', icon:'truck', color:'teal',
+    desc:'One stop at a time. Smart routing. Real-time earnings. No hassle.',
+    items:['One delivery visible at a time','One-tap navigation, address pre-loaded','ePOD: photo + signature, done','Earnings counter ticks up per delivery','Next stop highlights automatically','Handoff + ePOD in under 2 minutes'] },
+  { name:'Operations Manager', motto:'Power & Insight', icon:'layout-dashboard', color:'indigo',
+    desc:'The conductor — every section plays, you hear the whole composition.',
+    items:['One dashboard shows entire operation','Demand vs market intel side-by-side','Loss items surface automatically at top','City-level comparison','AI suggestions for funneling decisions','Purchase tasks created in under 20 min'] },
+  { name:'Super Admin', motto:'Oversight & Governance', icon:'shield', color:'purple',
+    desc:'Total visibility, precise intervention, complete confidence.',
+    items:['Platform health at a glance','Full seller/buyer verification workflows','Financial flows transparent and auditable','Anomaly alerts before they become problems','Feature toggles with one-line descriptions','Any audit query resolved in under 1 minute'] },
+];
+const colorMap = {
+  green:{bg:'bg-green-50',border:'border-green-200',accent:'text-green-600',iconBg:'bg-green-100',dot:'bg-green-500'},
+  blue:{bg:'bg-blue-50',border:'border-blue-200',accent:'text-blue-600',iconBg:'bg-blue-100',dot:'bg-blue-500'},
+  cyan:{bg:'bg-cyan-50',border:'border-cyan-200',accent:'text-cyan-600',iconBg:'bg-cyan-100',dot:'bg-cyan-500'},
+  orange:{bg:'bg-orange-50',border:'border-orange-200',accent:'text-orange-600',iconBg:'bg-orange-100',dot:'bg-orange-500'},
+  amber:{bg:'bg-amber-50',border:'border-amber-200',accent:'text-amber-600',iconBg:'bg-amber-100',dot:'bg-amber-500'},
+  teal:{bg:'bg-teal-50',border:'border-teal-200',accent:'text-teal-600',iconBg:'bg-teal-100',dot:'bg-teal-500'},
+  indigo:{bg:'bg-indigo-50',border:'border-indigo-200',accent:'text-indigo-600',iconBg:'bg-indigo-100',dot:'bg-indigo-500'},
+  purple:{bg:'bg-purple-50',border:'border-purple-200',accent:'text-purple-600',iconBg:'bg-purple-100',dot:'bg-purple-500'},
+};
+let activeRole=0;
+function renderRoleSelector(){const el=document.getElementById('roleSelector');el.innerHTML=roles.map((r,i)=>{const c=colorMap[r.color];const a=i===activeRole;const ring={green:'ring-green-300',blue:'ring-blue-300',cyan:'ring-cyan-300',orange:'ring-orange-300',amber:'ring-amber-300',teal:'ring-teal-300',indigo:'ring-indigo-300',purple:'ring-purple-300'}[r.color];return`<button onclick="selectRole(${i})" class="flex flex-col items-center gap-2 px-4 py-3 rounded-2xl ${a?c.iconBg+' border-2 '+c.border+' ring-2 ring-offset-2 '+ring:'bg-white border border-navy-200 hover:bg-navy-50'} transition-all duration-200 cursor-pointer min-w-[80px]"><div class="w-10 h-10 ${a?c.iconBg:'bg-navy-50'} rounded-xl flex items-center justify-center"><i data-lucide="${r.icon}" class="w-5 h-5 ${a?c.accent:'text-navy-400'}"></i></div><span class="text-xs font-semibold ${a?c.accent:'text-navy-400'}">${r.name}</span></button>`}).join('')}
+function renderRoleDetail(){const r=roles[activeRole];const c=colorMap[r.color];const bc={green:'border-green-300',blue:'border-blue-300',cyan:'border-cyan-300',orange:'border-orange-300',amber:'border-amber-300',teal:'border-teal-300',indigo:'border-indigo-300',purple:'border-purple-300'}[r.color];document.getElementById('roleDetail').innerHTML=`<div class="bg-navy-50 rounded-2xl border ${bc} overflow-hidden" style="animation:slideUp 0.35s ease"><div class="p-8 sm:p-10"><div class="flex items-center gap-4 mb-6"><div class="w-14 h-14 ${c.iconBg} rounded-2xl flex items-center justify-center"><i data-lucide="${r.icon}" class="w-7 h-7 ${c.accent}"></i></div><div><h3 class="text-xl font-bold text-navy-500">${r.name}</h3><p class="text-sm font-semibold ${c.accent}">${r.motto}</p></div></div><p class="text-base italic text-navy-400 mb-8 border-l-4 ${bc} pl-4">${r.desc}</p><div class="grid sm:grid-cols-2 gap-4">${r.items.map(item=>`<div class="flex items-start gap-3 p-4 ${c.bg} rounded-xl"><div class="w-6 h-6 ${c.iconBg} rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 ${c.accent}"></i></div><span class="text-sm text-navy-500 font-medium">${item}</span></div>`).join('')}</div></div></div>`;lucide.createIcons()}
+function selectRole(i){activeRole=i;renderRoleSelector();renderRoleDetail();lucide.createIcons()}
+renderRoleSelector();renderRoleDetail();
+
+// === SOLUTIONS ===
+const groups=[{key:'all',label:'All'},{key:'mgmt',label:'Management',color:'green'},{key:'field',label:'Field & Warehouse',color:'orange'},{key:'delivery',label:'Delivery',color:'blue'},{key:'users',label:'Sellers & Buyers',color:'teal'},{key:'platform',label:'Platform',color:'purple'}];
+const gc={green:{tab:'bg-green-600 text-white',num:'bg-green-100 text-green-600',dot:'bg-green-500'},orange:{tab:'bg-orange-500 text-white',num:'bg-orange-100 text-orange-600',dot:'bg-orange-500'},blue:{tab:'bg-blue-600 text-white',num:'bg-blue-100 text-blue-600',dot:'bg-blue-500'},teal:{tab:'bg-teal-600 text-white',num:'bg-teal-100 text-teal-600',dot:'bg-teal-500'},purple:{tab:'bg-purple-600 text-white',num:'bg-purple-100 text-purple-600',dot:'bg-purple-500'}};
+const solutions=[
+  {group:'mgmt',num:'1',name:'Aggregator Management System (AMS)',platform:'Web App',icon:'layout-dashboard',color:'green',sections:[
+    {title:'Catalog & Pricing',items:['Product catalog with grades, categories, seasonal tracking','Products sold under aggregator brand or external seller brand','WACP auto-calculation per SKU, committed pricing lock','Tiered pricing by membership level','Daily price lock — price doesn\'t change during the day','Loss event tracking — procurement cost > selling price flagged','Real-time margin exposure dashboard','Weight variance tolerance (+/-5% at QA)']},
+    {title:'Seller & Vendor Management',items:['Seller profiles (farm location, products, capacity, history)','Seller onboarding and verification','100-point vendor scoring (quality, reliability, volume, compliance)','Auto-suspension rules below threshold','Seller payment management (automatic via Qi)','Contracts and agreements management']},
+    {title:'Buyer Management & Collections',items:['Buyer profiles (restaurant, shop, supermarket, factory, exporter)','Multi-branch management for chain operations','Completeness scoring for approval (one-click approve/escalate)','Buyer credit management (BNPL limits, Qi Card digital credit line)','D+3/D+7 automatic payment reminders','D+15 auto-suspension with intervention window','Collections dashboard sorted by urgency','DSO tracking, receivables aging report']},
+    {title:'Procurement & Operations',items:['Demand aggregation engine (auto-roll orders into SKU-level requirements)','Market intelligence capture tool','Procurement planning console — demand vs intel side-by-side','Purchase task creation and assignment to field buyers','Unified exceptions panel (short supply, QA failures, cutoff breaches)','Night/shift close summary card']},
+    {title:'Inventory & Warehouse',items:['Real-time stock across all warehouses and cities','Stock by grade (A, B, C), aging and expiry tracking','Inter-city stock transfers','Cold, dry, processing storage management','Inventory alerts (low stock, expiring, surplus)']},
+    {title:'Quality, Processing & Export',items:['Quality check workflows, grading standards config','Grade-based routing rules (A→premium, B→standard, C→processing)','Processing pipeline management (fresh, clean, cut, can, freeze)','Packaging configuration (types, sizes, labels)','Export order management, documentation, compliance','Export analytics (volume, revenue, destinations)']},
+    {title:'Marketing & Promotions',items:['Discount management for expiring products','Personalized campaigns to buyers','Flash deals for surplus inventory','Full promotions suite: vouchers, bundles, homepage recommendations','Real-time campaign analytics']},
+    {title:'Dashboard & Reporting',items:['Real-time operations dashboard','WACP / Margin / Loss dashboard (cost per SKU, daily loss)','Quality dashboard (reject rate by SKU, QA throughput)','Growth dashboard (repeat rate, AOV, new vs returning)','Sales, inventory, seller performance, city comparison reports','Finance dashboard (DSO, receivables, margin trend)','Target KPIs: 95% OTD, 97% fill, 3% QA reject, 9.5% margin']},
+    {title:'AI & Intelligence',items:['Demand prediction per product per city','Dynamic price recommendations (WACP + intel + margin)','Buyer churn prediction (at-risk before inactive)','Inter-city funneling suggestions','Waste prediction and prevention alerts','Agricultural opportunity identification']},
+    {title:'Feedback & Issues',items:['Buyer feedback per order, per product, per delivery','Seller feedback per transaction, per grading','Issue ticket tracker (buyer, seller, internal)','Escalation workflows, SLA per issue type','Resolution satisfaction scoring']},
+    {title:'Accounting & Finance',items:['Seller payouts management','Auto-generated buyer invoices (committed price x accepted qty)','Invoice adjustment for rejected items','Refund & return processing','BNPL tracking, Qi Card credit line management','P&L per product category, per city']},
+  ]},
+  {group:'mgmt',num:'2',name:'Delivery Tracker & Management',platform:'Web App / iPad',icon:'map',color:'green',sections:[
+    {title:'Fleet Management',items:['Register and manage delivery drivers','Driver availability and shift scheduling','Vehicle management (trucks, vans, cold chain vehicles)','Assign orders to drivers (manual or auto-dispatch)','Driver performance tracking']},
+    {title:'GPS & Routing',items:['Live map view of all active drivers','Route optimization for multi-stop deliveries','Geo-fencing for delivery zones per city','ETA calculations with live updates']},
+    {title:'Delivery Operations',items:['Order queue for dispatch (pending, assigned, picked up, delivered)','Multi-order batching per delivery run','Cold chain monitoring during transport','Delivery confirmation (photo proof, signature)','Failed delivery handling and rescheduling']},
+    {title:'Analytics',items:['Average delivery time per zone / city','Driver utilization and efficiency reports','Delivery success / failure rates','Cost per delivery tracking','Cold chain compliance reports']},
+  ]},
+  {group:'mgmt',num:'3',name:'Call Center Management',platform:'Web App',icon:'phone',color:'green',sections:[
+    {title:'Seller Support',items:['Seller lookup and profile view','Help with product listing and pricing','Issue resolution (payment, quality disputes)','Seller onboarding assistance']},
+    {title:'Buyer Support',items:['Buyer lookup and profile view','Order placement assistance','Order tracking and status updates','Issue resolution (delivery, quality, payment)','Recurring order setup help']},
+    {title:'Feedback & Issues',items:['Capture buyer/seller feedback during calls','Issue ticket creation with category, priority','Escalation workflow (first-line → second-line → manager)','Process returns, complaints, refund requests']},
+    {title:'Operator Tools',items:['Script prompts for common scenarios','Average call-to-resolution time per operator','Callback flag for follow-up','Issue resolution tracking and SLA compliance']},
+  ]},
+  {group:'field',num:'4',name:'Staff App',platform:'Mini App',icon:'user-check',color:'orange',sections:[
+    {title:'Attendance',items:['Clock-in / Clock-out (fingerprint, NFC badge, QR code)','View assigned shifts and schedule','Shift swap requests and approvals','Attendance history']},
+    {title:'Daily Work',items:['Task checklists per role (opening, closing, processing duties)','Internal notifications and announcements','Leave / day-off requests']},
+    {title:'Finance',items:['Pay slip and salary summary view','Tip tracking (if applicable)','Performance metrics visibility']},
+  ]},
+  {group:'field',num:'5',name:'Runner / Field Procurement',platform:'Mobile App',icon:'map-pin',color:'orange',sections:[
+    {title:'Seller Visit Mode',items:['Daily pickup schedule and route','Seller profile and history view','Navigate to seller location (GPS)','Scan / log incoming products','Record quantity (weight, crate count, units)','Take photos of products received','Issue acceptance receipt to seller']},
+    {title:'Market Procurement Mode',items:['View aggregated demand (SKU-level requirements)','Market intelligence logging (5 fields, quick submit, form resets)','Procurement task queue (most urgent first)','Purchase confirmation with quantity, price, vendor','Purchase order lifecycle tracking']},
+    {title:'Vendor & Transport',items:['Vendor directory at wholesale market','Vendor scoring visible (100-point system)','Vendor purchase history','Log products loaded into vehicle','Track transport to warehouse, handoff to receiving']},
+    {title:'Offline & Performance',items:['Full offline mode — entries queue locally, sync on reconnect','Never loses data even without signal','Daily performance visible (collections completed, distance)']},
+  ]},
+  {group:'field',num:'6',name:'Warehouse Operations',platform:'Mini App (Products In)',icon:'warehouse',color:'orange',sections:[
+    {title:'Receiving & Traceability',items:['Accept products from Runner / delivery','Scan and verify quantities against acceptance receipt','Create lot record with full traceability (source, date, runner, quantity)','Lot splitting with traceability maintained','Assign storage location (cold, dry, processing queue)']},
+    {title:'Quality Assurance & Grading',items:['Pre-populated checklist per arriving lot','Three-button decision: Accept / Reject / Downgrade','Record quality metrics (freshness, size, damage, weight)','Photo capture embedded at defect step','Automatic escalation to Ops Manager on rejection']},
+    {title:'Funneling & Processing',items:['Route by grade: A→premium, B→standard, C→processing, Below→waste','Route by demand: high demand city gets priority','Processing pipeline: Received → Cleaning → Cutting → Packaging → Ready','Also: Cleaning → Canning → Sealed → Ready','Also: Cleaning → Freezing → Packaging → Ready','Record processing yields (input vs output weight)']},
+    {title:'Packaging & Waste',items:['Packaging task assignments','Label printing and application','Package weight verification','Barcode / QR code generation per package','Export packaging compliance check','Log waste items, categorize type, track volumes and costs']},
+  ]},
+  {group:'field',num:'7',name:'Order Fulfillment + Hardware',platform:'Mini App (Products Out)',icon:'package',color:'orange',sections:[
+    {title:'Order Queue',items:['View pending orders to fulfill','Priority ordering (urgent, same-day, scheduled)','Order details with product list, quantities, buyer info']},
+    {title:'Picking & Packing',items:['Pick list generation per order','Barcode scanning to verify correct products','Weight verification per item','Pack into delivery containers']},
+    {title:'Dispatch',items:['Assign packed orders to delivery drivers','Generate delivery manifest','Print dispatch documents','Handoff confirmation to driver']},
+    {title:'Hardware',items:['Barcode scanners for product verification','Scales for weight verification','Label printers for delivery labels','Invoice printers','Handheld devices for warehouse mobility']},
+  ]},
+  {group:'delivery',num:'8',name:'Delivery Driver App',platform:'Mobile App',icon:'truck',color:'blue',sections:[
+    {title:'Navigation & Delivery',items:['One delivery visible at a time — not a list','One-tap navigation with address pre-loaded','Multi-stop delivery sequence optimized','Contact buyer (call / chat)','Automatic highlight of next stop after confirmation']},
+    {title:'ePOD & Confirmation',items:['Confirm pickup from warehouse with manifest','ePOD capture: photo + merchant signature','Record delivery notes (partial delivery, issues)','Failed delivery handling and rescheduling']},
+    {title:'Cold Chain',items:['Temperature monitoring during transport','Cold chain compliance logging','Alert on temperature breach']},
+    {title:'Earnings & Performance',items:['Daily delivery summary','Real-time earnings counter per delivery','Performance metrics (deliveries completed, on-time %)','Delivery handoff + ePOD in under 2 minutes target']},
+  ]},
+  {group:'users',num:'9',name:'Seller Mini App',platform:'Mini App + SuperQi',icon:'sprout',color:'teal',sections:[
+    {title:'Product Management',items:['List products available for sale','Set quantities and pricing','View current market prices (fair price indicator)','Schedule pickups for product collection']},
+    {title:'Sales & Revenue',items:['View products sold (quantities, revenue — no buyer identification)','Sales history and analytics','Revenue tracking and trends']},
+    {title:'Payments',items:['Payment history (automatic via Qi)','Pending payments view','Payment confirmation notifications','Financial summary and reports']},
+    {title:'Quality & Feedback',items:['View quality grades received on products','Quality trend over time','Constructive improvement suggestions','Submit issues (payment, grading disputes)','Track issue resolution status']},
+    {title:'Intelligence',items:['Selling patterns and trends','Price trend visibility','Demand insights (what\'s in demand, what\'s surplus)','Recommendations on what to grow / produce','Market updates and seasonal info']},
+  ]},
+  {group:'users',num:'10',name:'Buyer Mini App',platform:'Mini App + SuperQi + Web',icon:'shopping-cart',color:'teal',sections:[
+    {title:'Browsing & Ordering',items:['Browse catalog by category, availability, grade','Search and filter, natural language search (Arabic)','Price trend tracking (7-day, 30-day, 6-month per product)','Quick Lists / saved baskets for repeat orders','Predictive cart pre-fill (cart ready before they open)','Order cutoff countdown display','Delivery time slot selection']},
+    {title:'AI-Powered Ordering',items:['Photo-to-Cart — photograph handwritten list, AI recognizes','Scan-to-Cart — image recognition for shopping lists','Voice-to-Cart — dictate in Iraqi Arabic','Chat-to-Cart — conversational ordering','Snap-to-Add — photograph a produce item, AI identifies','WhatsApp full ordering — place orders without app','Smart reorder suggestions from purchase history']},
+    {title:'Payments & Invoicing',items:['Qi Card / SuperKey Wallet payment','BNPL (Buy Now Pay Later)','Qi Card digital credit line','Cash on delivery','Auto-generated invoices (committed price x accepted qty)','Invoice adjustment for rejected items','Refund & return request flow','Downloadable purchase reports (PDF & Excel)']},
+    {title:'Recurring & Tracking',items:['Set up recurring orders (daily, weekly, custom)','Auto-replenishment based on consumption','Pause / resume recurring orders','Refill cart → only revise, don\'t rebuild','Real-time order status tracking','Live delivery tracking with map and ETA','Post-delivery accept/reject per item (under 30 seconds)']},
+    {title:'Feedback & Analytics',items:['Rate product quality per order / per item','Report quality issues with photos','Submit issue tickets, track resolution','Order history and spending patterns','Cost optimization suggestions','Product sharing (Instagram, WhatsApp, link)','In-app chat support, hotline, FAQ']},
+  ]},
+  {group:'platform',num:'11',name:'Food Rescue & Waste',platform:'Mini App / Web',icon:'leaf',color:'purple',sections:[
+    {title:'Good-to-Sell',items:['List surplus products at discounted prices before expiry','Time-limited flash deals visible to nearby buyers','Bulk discount for large surplus quantities','Customer pickup scheduling','Track saved products and impact metrics']},
+    {title:'Waste Management',items:['Categorize waste types (organic, packaging, processing waste)','Composting partner directory','Waste pickup scheduling with partners','Track waste volume over time, set reduction goals']},
+    {title:'Donation',items:['Identify products suitable for donation (safe but unsold)','Partner with local shelters / food banks / NGOs','Donation scheduling and logistics','Tax deduction documentation','Impact reporting (kg donated, people served)']},
+    {title:'Insights',items:['Waste analytics (what\'s wasted most, when, why)','Cost of waste reporting','Processing yield analytics (input vs output vs waste)','Sustainability score for the operation']},
+  ]},
+  {group:'platform',num:'12',name:'Qi Super Admin',platform:'Web App',icon:'shield',color:'purple',sections:[
+    {title:'Platform Management',items:['Aggregator account management','Seller/buyer verification with completeness scoring','Platform configuration (cities, zones, product categories)','Feature toggle controls with one-line descriptions','Role-based access control','Real-time transaction monitoring']},
+    {title:'Financial Oversight',items:['Seller payout oversight','Buyer billing and BNPL oversight','Commission and fee management','Financial reconciliation dashboard','KYB/KYC verification gate']},
+    {title:'Analytics & Intelligence',items:['Platform-wide GMV, revenue, margin tracking','Seller analytics (top sellers, quality trends, reliability, growth)','Buyer analytics (order patterns, payment behavior, churn risk)','City-level performance comparison','Product analytics (movers, seasonal trends, price trends)','Processing analytics (throughput, yield, waste %, capacity)','Delivery analytics (on-time %, cost, zone performance)','Supply vs demand gap analysis per city per product']},
+    {title:'Monitoring & Compliance',items:['Operations dashboard (orders, deliveries, processing)','System health (uptime, sync, device connectivity)','Fraud and anomaly detection alerts','Support ticket overview','Audit logs (immutable, 7-year retention)','Food safety compliance tracking','Export compliance documentation']},
+  ]},
+];
+let activeGroup='all';
+function renderTabs(){document.getElementById('solutionTabs').innerHTML=groups.map(g=>{const a=g.key===activeGroup;const cls=a?(g.key==='all'?'bg-brand-500 text-white':gc[g.color].tab):'bg-white text-navy-500 border border-navy-200 hover:bg-navy-50';return`<button onclick="setGroup('${g.key}')" class="px-4 py-2 rounded-xl text-sm font-semibold ${cls} transition-colors duration-200 cursor-pointer">${g.label}</button>`}).join('')}
+function renderSolutions(){const f=activeGroup==='all'?solutions:solutions.filter(s=>s.group===activeGroup);let html='';f.forEach(s=>{const c=gc[s.color];const sectHtml=s.sections.map(sec=>`<div class="bg-white rounded-2xl border border-navy-200 p-5"><div class="flex items-center gap-2.5 mb-4"><div class="w-7 h-7 ${c.num} rounded-lg flex items-center justify-center"><i data-lucide="layers" class="w-3.5 h-3.5"></i></div><h4 class="text-sm font-bold text-navy-500">${sec.title}</h4></div><div class="flex flex-wrap gap-2">${sec.items.map(item=>`<span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-navy-50 rounded-lg border border-navy-200 text-xs text-navy-500 font-medium cursor-pointer hover:border-navy-300 transition-colors duration-150">${item}</span>`).join('')}</div></div>`).join('');html+=`<div class="bg-white rounded-xl border border-navy-200 mb-3 overflow-hidden fade-up"><div class="flex items-center gap-3 px-5 py-4 cursor-pointer hover:bg-navy-50 transition-colors duration-200" onclick="toggleSolution(this)"><div class="w-9 h-9 ${c.num} rounded-lg flex items-center justify-center flex-shrink-0"><i data-lucide="${s.icon}" class="w-4 h-4"></i></div><div class="flex-1 min-w-0"><h3 class="font-bold text-sm text-navy-500">${s.name}</h3></div><span class="text-xs text-navy-400 font-medium hidden sm:block">${s.platform}</span><i data-lucide="chevron-down" class="w-4 h-4 text-navy-300 transition-transform duration-200 sol-chev"></i></div><div class="sol-body border-t border-navy-200" style="display:none"><div class="p-5 bg-navy-50/50 grid sm:grid-cols-2 gap-3">${sectHtml}</div></div></div>`});document.getElementById('solutionCards').innerHTML=html;lucide.createIcons();observeFadeUps()}
+function toggleSolution(h){const b=h.nextElementSibling;const c=h.querySelector('.sol-chev');const o=b.style.display!=='none';if(o){b.style.maxHeight=b.scrollHeight+'px';requestAnimationFrame(()=>{b.style.maxHeight='0px';b.style.overflow='hidden'});setTimeout(()=>{b.style.display='none';b.style.maxHeight='';b.style.overflow=''},300);c.classList.remove('rotate-180')}else{b.style.display='';b.style.maxHeight='0px';b.style.overflow='hidden';requestAnimationFrame(()=>{b.style.maxHeight=b.scrollHeight+'px'});setTimeout(()=>{b.style.maxHeight='';b.style.overflow=''},300);c.classList.add('rotate-180')}}
+function setGroup(g){activeGroup=g;renderTabs();renderSolutions()}
+renderTabs();renderSolutions();
+
+// === AI ===
+const aiCards=[
+  {icon:'brain',title:'Agricultural Intelligence',subtitle:'Understand Iraq\'s food production',accentSolid:'green',items:[{text:'National production data & capability mapping',sub:'What grows where, how much, what\'s possible'},{text:'Investment opportunity identification',sub:'Potato shortage + vast land = signal to investors'},{text:'Supply forecasting from seller patterns',sub:'Predict what\'s coming before it arrives'},{text:'AI image recognition for harvest estimation',sub:'Photograph a field, estimate the yield'}]},
+  {icon:'target',title:'Demand & Supply Funneling',subtitle:'Right product, right city, right time',accentSolid:'blue',items:[{text:'Demand forecasting per product per city',sub:'Know what every city needs before they order'},{text:'Inter-city surplus-to-shortage optimization',sub:'Baghdad surplus tomatoes fill Basra shortage'},{text:'Buyer churn prediction',sub:'Surface at-risk merchants before they leave'},{text:'Seasonal pattern recognition',sub:'Plan months ahead, not hours'}]},
+  {icon:'coins',title:'Price Intelligence',subtitle:'Fair for everyone, transparent to all',accentSolid:'amber',items:[{text:'Dynamic WACP + market intel + margin optimization',sub:'Optimal selling price, always'},{text:'Price memory analysis',sub:'Historical trends reveal manipulation'},{text:'Overpriced / underpriced detection',sub:'Flag anomalies in real-time'},{text:'AI handwriting recognition for buyer orders',sub:'Scan a handwritten list, cart auto-fills'}]},
+  {icon:'shield-alert',title:'Fraud & Quality',subtitle:'Catch it before it costs',accentSolid:'red',items:[{text:'Pricing pattern anomaly detection',sub:'Spot collusion and manipulation'},{text:'Quality grade manipulation detection',sub:'Vendors gaming the grading system'},{text:'Inventory shrinkage monitoring',sub:'Where did the missing produce go?'},{text:'Ghost order & collusion detection',sub:'Patterns humans can\'t see'}]},
+  {icon:'leaf',title:'Sustainability & Export',subtitle:'Reduce waste, build export power',accentSolid:'green',items:[{text:'Waste prediction and prevention',sub:'Intervene before products expire'},{text:'Export opportunity scoring',sub:'Which products, which markets, when'},{text:'Processing yield optimization',sub:'Maximize output, minimize waste'},{text:'Agricultural advisory from data',sub:'Tell farmers what the market actually needs'}]},
+];
+const aiAccentMap={green:{numBg:'bg-green-100',numText:'text-green-600',cardBg:'bg-green-50',iconBg:'bg-green-500'},blue:{numBg:'bg-blue-100',numText:'text-blue-600',cardBg:'bg-blue-50',iconBg:'bg-blue-500'},amber:{numBg:'bg-amber-100',numText:'text-amber-600',cardBg:'bg-amber-50',iconBg:'bg-amber-500'},red:{numBg:'bg-red-100',numText:'text-red-600',cardBg:'bg-red-50',iconBg:'bg-red-500'}};
+let activeAi=0,aiAutoPlay=null;
+function renderAiNav(){document.getElementById('aiNav').innerHTML=aiCards.map((a,i)=>{const act=i===activeAi;return`<button onclick="selectAi(${i})" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${act?'bg-brand-500 text-white':'bg-white text-navy-500 border border-navy-200 hover:bg-navy-50'}"><i data-lucide="${a.icon}" class="w-4 h-4"></i><span class="hidden sm:inline">${a.title}</span></button>`}).join('')}
+function renderAiDots(){document.getElementById('aiDots').innerHTML=aiCards.map((_,i)=>`<button onclick="selectAi(${i})" class="w-2 h-2 rounded-full transition-all duration-200 cursor-pointer ${i===activeAi?'bg-brand-500 w-6':'bg-brand-300 hover:bg-brand-400'}"></button>`).join('')}
+function renderAiPanel(){const a=aiCards[activeAi];const ac=aiAccentMap[a.accentSolid];document.getElementById('aiPanel').innerHTML=`<div class="bg-white rounded-2xl border border-navy-200 p-8 sm:p-10" style="animation:slideUp 0.4s ease"><div class="flex items-center gap-4 mb-2"><div class="w-12 h-12 ${ac.iconBg} rounded-2xl flex items-center justify-center"><i data-lucide="${a.icon}" class="w-6 h-6 text-white"></i></div><div><h3 class="text-xl font-bold text-navy-500">${a.title}</h3><p class="text-sm text-navy-400">${a.subtitle}</p></div></div><div class="mt-8 grid sm:grid-cols-2 gap-4">${a.items.map((item,idx)=>`<div class="flex items-start gap-4 p-4 ${ac.cardBg} rounded-xl border border-navy-200/50 hover:border-navy-300 transition-colors duration-200 cursor-pointer" style="animation:slideUp ${0.35+idx*0.08}s ease"><div class="w-8 h-8 ${ac.numBg} rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"><span class="${ac.numText} text-xs font-bold">${idx+1}</span></div><div><p class="text-sm font-semibold text-navy-500">${item.text}</p><p class="text-xs text-navy-400 mt-1">${item.sub}</p></div></div>`).join('')}</div></div>`;lucide.createIcons()}
+function selectAi(i){activeAi=i;renderAiNav();renderAiDots();renderAiPanel();lucide.createIcons();resetAiAutoPlay()}
+function resetAiAutoPlay(){if(aiAutoPlay)clearInterval(aiAutoPlay);aiAutoPlay=setInterval(()=>{activeAi=(activeAi+1)%aiCards.length;renderAiNav();renderAiDots();renderAiPanel();lucide.createIcons()},6000)}
+renderAiNav();renderAiDots();renderAiPanel();resetAiAutoPlay();
+
+// === UTILS ===
+function observeFadeUps(){const o=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-up:not(.visible)').forEach(el=>o.observe(el))}
+observeFadeUps();
+
+let mobileNavOpen=false;
+function toggleMobileNav(){mobileNavOpen=!mobileNavOpen;const m=document.getElementById('mobileMenu');const b=document.querySelector('.burger-icon');const c=document.querySelector('.burger-close');if(mobileNavOpen){m.style.maxHeight=m.scrollHeight+'px';b.classList.add('hidden');c.classList.remove('hidden')}else{m.style.maxHeight='0';b.classList.remove('hidden');c.classList.add('hidden')}}
+function closeMobileNav(){mobileNavOpen=false;document.getElementById('mobileMenu').style.maxHeight='0';document.querySelector('.burger-icon').classList.remove('hidden');document.querySelector('.burger-close').classList.add('hidden')}
+
+window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('shadow-lg',window.scrollY>50)});
+lucide.createIcons();
+</script>
+</body>
+</html>
